@@ -1,0 +1,67 @@
+/**
+ * http://mathworld.wolfram.com/Octahedron.html
+ * http://en.wikipedia.org/wiki/Octahedron
+ * http://www.mathsisfun.com/geometry/octahedron.html
+ * get triangular faces using this method http://dabblet.com/gist/3805071
+ */
+body { overflow: hidden; }
+.polyhedron {
+	position: relative;
+	margin: 20% auto;
+	padding: 0;
+	width: 16em; height: 16em;
+	list-style: none;
+	perspective: 100em;
+	transform-style: preserve-3d;
+	animation: rot 30s infinite linear;
+	cursor: pointer;
+}
+@keyframes rot {
+	from { transform: rotateZ(-15deg) rotateX(45deg) rotateY(0deg); }
+	to { transform: rotateZ(345deg) rotateX(-315deg) rotateY(360deg); }
+}
+.side, .side a, .side img { display: block; width: 100%; height: 100%; }
+.side {
+	position: absolute;
+	backface-visibility: hidden;
+	pointer-events: none;
+}
+.side img { opacity: .75; pointer-events: auto; cursor: pointer; }
+.side img:hover { opacity: 1; }
+.side:nth-child(1) {
+	transform: rotateX(35.26deg) translateZ(4.1em);
+}
+.side:nth-child(2) {
+	transform: rotateY(90deg) rotateX(35.26deg) translateZ(4.1em);
+}
+.side:nth-child(3) {
+	transform: rotateY(180deg) rotateX(35.26deg) translateZ(4.1em);
+}
+.side:nth-child(4) {
+	transform: rotateY(-90deg) rotateX(35.26deg) translateZ(4.1em);
+}
+.side:nth-child(5) {
+	transform: translateY(52%) rotateX(-35.26deg) translateZ(4.1em);
+}
+.side:nth-child(6) { 
+	transform: translateY(52%) rotateY(90deg) rotateX(-35.26deg) translateZ(4.1em);
+}
+.side:nth-child(7) {
+	transform: translateY(52%) rotateY(180deg) rotateX(-35.26deg) translateZ(4.1em);
+}
+.side:nth-child(8) {
+	transform: translateY(52%) rotateY(-90deg) rotateX(-35.26deg) translateZ(4.1em);
+}
+.side a {
+	overflow: hidden;
+	transform: translateY(50%) rotate(30deg) skewY(30deg) scaleX(.866);
+}
+.side img {
+	transform: scaleX(1.155) skewY(-30deg) rotate(-30deg) translateY(-50%);
+}
+.side:nth-child(n+5) a {
+	transform: translateY(-50%) rotate(30deg) skewY(30deg) scaleX(.866);
+}
+.side:nth-child(n+5) img {
+	transform: scaleX(1.155) skewY(-30deg) rotate(-30deg) translateY(50%);
+}

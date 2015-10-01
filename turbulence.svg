@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" 
+"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100px" height="100px" viewBox="0 0 100 100"
+     xmlns="http://www.w3.org/2000/svg" version="1.1">
+  <title>Example test.svg - introducing filter effects</title>
+  <!-- Filter Definition -->
+  <defs>
+    <filter id="MyFilter" filterUnits="userSpaceOnUse" x="0" y="0" width="200" height="120">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="4" result="blur"/>
+      <feTurbulence type="fractalNoise" id="turbburb" stitchTiles="stich" baseFrequency="0.05" numOctaves="1" width="100%" height="100%" x="1" y="1">
+        <animate attributeName="seed" 
+                 from="1" to="20" by="1" dur="5s" repeatCount="indefinite" />
+        <animate attributeName="baseFrequency" 
+                 min="0" max="1" by="0.01" dur="5s" repeatCount="indefinite" />
+      </feTurbulence>
+      <feComposite in="specOut" in2="SourceAlpha" operator="in" result="specOut"/>
+      <feComposite in="SourceGraphic" in2="specOut" operator="arithmetic" 
+                   k1="0" k2="1" k3="1" k4="0" result="litPaint"/>
+    </filter>
+  </defs>
+
+  <!--
+      If you independently view the SVG this javascript clip should work, but
+      only in the context of the doom root being <svg></svg>
+      - zv
+  -->
+  <script type="application/ecmascript"> <![CDATA[
+  function box_click(evt) {
+  var box = evt.target;
+  var h = box.getAttribute("height")
+  var w = box.getAttribute("width")
+  box.setAttribute("width", w*2);
+  box.setAttribute("height", h*2);
+  console.log(box)
+  }
+  ]]> </script>
+
+  <g filter="url(#MyFilter)">
+    <rect onclick="box_click(evt)" x="1" y="1" width="100" height="100" stroke="black" stroke-width="10"/>
+    <!--
+    <circle cx="0" cy="0" r="200" fill="red" stroke="blue" stroke-width="10"  />
+    -->
+  </g>
+</svg>
+
